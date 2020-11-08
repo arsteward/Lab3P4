@@ -1,4 +1,5 @@
 import pytest
+import time
 from Invoice import Invoice
 
 @pytest.fixture()
@@ -26,3 +27,16 @@ def test_CanCalculateTotalDiscount(invoice, products):
 def test_CanCalculateTotalPurePrice(invoice, products):
     invoice.totalPurePrice(products)
     assert invoice.totalPurePrice(products) == 69.38
+
+# the pupose of this test is to test the input funtion of the invoice
+def testInput():
+        unit_price = Invoice().inputNumber("Please enter unit price : ")
+        while (unit_price is None):
+            time.sleep(.5)
+        assert type(unit_price) is float
+
+#The purpose of this test is to test the add items function
+def testAddProduct():
+        invoice = Invoice()
+        invoice.addProducts(2, 2, 2)
+        assert invoice.items["qnt"] == 2
